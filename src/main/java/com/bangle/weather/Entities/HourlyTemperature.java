@@ -24,4 +24,19 @@ public class HourlyTemperature {
     public void setHour ( String hour ) {
         this.hour = hour;
     }
+
+    @Override
+    public boolean equals ( Object obj ) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof HourlyTemperature)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        HourlyTemperature c = (HourlyTemperature) obj;
+        return (this.temperature==c.temperature) && (this.hour.equals(c.hour));
+    }
 }
