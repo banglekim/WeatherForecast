@@ -35,7 +35,7 @@ public class HourlyTemperature {
             return false;
         }
 
-        // typecast o to Complex so that we can compare data members
+        // typecast obj to HourlyTemperature so that we can compare data members
         HourlyTemperature c = (HourlyTemperature) obj;
         return (this.temperature==c.temperature) && (this.hour.equals(c.hour));
     }
