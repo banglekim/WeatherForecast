@@ -4,6 +4,7 @@ import com.bangle.weather.Entities.WeatherForecastResponse;
 import com.bangle.weather.Services.WeatherService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class WeatherAppController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{zipCode}")
     @ApiOperation(value = "Api to get weather forecast for tomorrow for location with provided zipCode and view")
+    @PreAuthorize("hasRole('USER')")
     public ModelAndView getWeatherForecast ( @PathVariable("zipCode") String zipCode ) {
         LocalDate tomorrow = LocalDate.now().plusDays(1);
 
