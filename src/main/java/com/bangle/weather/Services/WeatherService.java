@@ -29,7 +29,9 @@ public class WeatherService {
 
     private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
 
-    private WeatherForecastResponse buildWeatherForecastResponse(WeatherForecast forecast, LocalDate date) {
+    private final RestTemplate restTemplate= new RestTemplate();
+
+    public WeatherForecastResponse buildWeatherForecastResponse(WeatherForecast forecast, LocalDate date) {
         WeatherForecastResponse response = new WeatherForecastResponse();
         response.setCity(forecast.getName());
         response.setDate(date.toString());
@@ -51,12 +53,9 @@ public class WeatherService {
         String api = projectProperties.getProperty(Constants.API_KEY);
 
         URI uri = new UriTemplate(Constants.FORECAST_URL).expand(zipCode,api);
-        RestTemplate restTemplate = new RestTemplate();
 
-        RequestEntity<?> request = RequestEntity.get(uri)
-                .accept(MediaType.APPLICATION_JSON).build();
         ResponseEntity<WeatherForecast> exchange = restTemplate
-                .exchange(request, WeatherForecast.class);
+                .getForEntity(uri, WeatherForecast.class);
 
         WeatherForecastResponse response = buildWeatherForecastResponse(exchange.getBody(), date);
         return response;

@@ -1,17 +1,15 @@
 package com.bangle.weather.Entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class WeatherForecast implements Serializable {
+public class WeatherForecast {
 
     private String name;
-
+    @JsonProperty("list")
     private List<WeatherEntry> entries = new ArrayList<>();
 
     public String getName() {
@@ -22,17 +20,15 @@ public class WeatherForecast implements Serializable {
         this.name = name;
     }
 
-    @JsonProperty("entries")
     public List<WeatherEntry> getEntries() {
         return this.entries;
     }
 
-    @JsonSetter("list")
     public void setEntries(List<WeatherEntry> entries) {
         this.entries = entries;
     }
 
-    @JsonSetter("city")
+    @JsonProperty("city")
     public void setCity( Map <String, Object> city) {
         setName(city.get("name").toString());
     }
