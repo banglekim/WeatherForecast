@@ -1,5 +1,6 @@
 package com.bangle.weather.Services;
 
+import com.bangle.weather.Aspects.Loggable;
 import com.bangle.weather.Configurations.ProjectProperties;
 import com.bangle.weather.Entities.HourlyTemperature;
 import com.bangle.weather.Entities.WeatherEntry;
@@ -9,6 +10,7 @@ import com.bangle.weather.Utilities.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +26,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class WeatherService {
-    @Autowired
-    private ProjectProperties projectProperties;
+    /*@Autowired
+    private ProjectProperties projectProperties;*/
+    @Value("${weather.api.key}")
+    private String api;
 
-    private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
+//    private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
 
     private final RestTemplate restTemplate= new RestTemplate();
 
@@ -48,9 +52,10 @@ public class WeatherService {
         return response;
     }
 
+    @Loggable
     public WeatherForecastResponse getWeatherForecast( String zipCode, LocalDate date) {
-        logger.info("Requesting weather forecast for {}/{}", zipCode, date);
-        String api = projectProperties.getProperty(Constants.API_KEY);
+//        logger.info("Requesting weather forecast for {}/{}", zipCode, date);
+//        String api = projectProperties.getProperty(Constants.API_KEY);
 
         URI uri = new UriTemplate(Constants.FORECAST_URL).expand(zipCode,api);
 

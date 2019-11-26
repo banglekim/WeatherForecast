@@ -1,5 +1,14 @@
 # Weather
 Demo project to get weather forecast for tomorrow for a specific city/location provided by zip code and other features (maybe)
+Techologies used in the project:
+- Spring Boot
+- Spring data/jpa
+- Spring Security
+- Spring AOP
+- Swagger
+- slf4j
+- mustache
+- RestTemplate
 1. General guideline:
 - Download source code and build from IntelliJ or run the executable file weather-0.0.1-SNAPSHOT.jar 
 uploaded into this repository.
